@@ -1,0 +1,6 @@
+StrTelive.sh script is created for run StrTelive from Binary StrTelive. 
+This script can be used with QT5.9.1 installed in /home/[myhome]/Qt5.9.1/5.9.1/gcc_64
+Binare runs from /home/[myhome]/tetra/StrLive. 
+
+This has been run on a Linux Mint 17.3. 64 Bit. And the Binary is created in Linux Mint.
+The Binary is placed at 
