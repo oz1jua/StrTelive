@@ -17,7 +17,7 @@ This version is created with QT Creator 4.3.1 and based on QT 5.9.1 Open Source 
 
 I still have no idea haw to deploy runnning version. Still have to lean a lot.... 
 
-Added funktion for Switch between FIFO and UDP.
+Added function for switch between FIFO and UDP.
 
 ---------- Disclaimer ----------
 
