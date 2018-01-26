@@ -285,13 +285,24 @@ void MainWindow::on_spinBox2_valueChanged(int arg1)
     CalcLCD();
 
     QString currPath = QDir::homePath();
-    if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver2udp").exists()){
+    if (fifo == "N"){
+      if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver2udp").exists()){
         //The file doesn't exist
         QMessageBox msgBox;
         msgBox.addButton(QMessageBox::Ok);
         msgBox.setText(QString("File receiver2udp missing !!"));
         msgBox.exec();
+      }
+    }
 
+    if (fifo == "Y"){
+      if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver2").exists()){
+        //The file doesn't exist
+        QMessageBox msgBox;
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.setText(QString("File receiver2 missing !!"));
+        msgBox.exec();
+      }
     }
 
 }
@@ -306,13 +317,24 @@ void MainWindow::on_spinBox3_valueChanged(int arg1)
     CalcLCD();
 
     QString currPath = QDir::homePath();
-    if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver3udp").exists()){
+    if (fifo == "N"){
+      if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver3udp").exists()){
         //The file doesn't exist
         QMessageBox msgBox;
         msgBox.addButton(QMessageBox::Ok);
         msgBox.setText(QString("File receiver3udp missing !!"));
         msgBox.exec();
+      }
+    }
 
+    if (fifo == "Y"){
+      if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver3").exists()){
+        //The file doesn't exist
+        QMessageBox msgBox;
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.setText(QString("File receiver3 missing !!"));
+        msgBox.exec();
+      }
     }
 }
 
@@ -326,13 +348,24 @@ void MainWindow::on_spinBox4_valueChanged(int arg1)
     CalcLCD();
 
     QString currPath = QDir::homePath();
-    if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver4udp").exists()){
+    if (fifo == "N"){
+      if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver4udp").exists()){
         //The file doesn't exist
         QMessageBox msgBox;
         msgBox.addButton(QMessageBox::Ok);
         msgBox.setText(QString("File receiver4udp missing !!"));
         msgBox.exec();
+       }
+    }
 
+    if (fifo == "Y"){
+      if (!QFileInfo(currPath + "/tetra/osmo-tetra-sq5bpf/src/receiver4").exists()){
+        //The file doesn't exist
+        QMessageBox msgBox;
+        msgBox.addButton(QMessageBox::Ok);
+        msgBox.setText(QString("File receiver4 missing !!"));
+        msgBox.exec();
+      }
     }
 
 }
