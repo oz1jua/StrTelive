@@ -1,4 +1,4 @@
-StrTelive Version 0.10 Beta. 
+StrTelive Version 0.20 Beta. 
 
 StrTelive - Program use for starting Telive.
 Telive was created by Jacek Lipkowski sq5bpf@lipkowski.org. 
@@ -16,6 +16,8 @@ This is still just in Beta version and it must be compiled with QT Creator.
 This version is created with QT Creator 4.3.1 and based on QT 5.9.1 Open Source version.
 
 I still have no idea haw to deploy runnning version. Still have to lean a lot.... 
+
+Added funktion for Switch between FIFO and UDP.
 
 ---------- Disclaimer ----------
 
