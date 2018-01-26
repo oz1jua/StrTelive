@@ -98,7 +98,7 @@ public:
         label_5->setText(QApplication::translate("Dialog", "* Number of Telive Receivers", Q_NULLPTR));
         label_7->setText(QApplication::translate("Dialog", "* TETRAD", Q_NULLPTR));
         label_6->setText(QApplication::translate("Dialog", "* GNU Radio Companion", Q_NULLPTR));
-        label->setText(QApplication::translate("Dialog", "Start Telive Beta Version 0.10", Q_NULLPTR));
+        label->setText(QApplication::translate("Dialog", "Start Telive Beta Version 0.20", Q_NULLPTR));
         label_9->setText(QString());
         label_8->setText(QApplication::translate("Dialog", "<html><head/><body><p><a href=\"https://github.com/sq5bpf/telive\"><span style=\" text-decoration: underline; color:#0000ff;\">https://github.com/sq5bpf/telive</span></a></p></body></html>", Q_NULLPTR));
         label_2->setText(QApplication::translate("Dialog", "Start Telive application is created \n"

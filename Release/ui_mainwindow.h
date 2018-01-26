@@ -21,6 +21,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
@@ -43,32 +44,34 @@ public:
     QSplitter *splitter;
     QLabel *label;
     QSpinBox *spinBox1;
-    QLabel *label_6;
+    QLabel *label_rcv1;
     QLCDNumber *lcdNumber_FR1;
     QLabel *label_10;
     QLCDNumber *lcdNumber_TO1;
     QSplitter *splitter_2;
     QLabel *label_2;
     QSpinBox *spinBox2;
-    QLabel *label_7;
+    QLabel *label_rcv2;
     QLCDNumber *lcdNumber_FR2;
     QLabel *label_11;
     QLCDNumber *lcdNumber_TO2;
     QSplitter *splitter_3;
     QLabel *label_3;
     QSpinBox *spinBox3;
-    QLabel *label_8;
+    QLabel *label_rcv3;
     QLCDNumber *lcdNumber_FR3;
     QLabel *label_12;
     QLCDNumber *lcdNumber_TO3;
     QSplitter *splitter_4;
     QLabel *label_4;
     QSpinBox *spinBox4;
-    QLabel *label_9;
+    QLabel *label_rcv4;
     QLCDNumber *lcdNumber_FR4;
     QLabel *label_13;
     QLCDNumber *lcdNumber_TO4;
     QLabel *MyMsg;
+    QRadioButton *radioButton_FIFO;
+    QRadioButton *radioButton_UDP;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuHelp;
@@ -122,9 +125,9 @@ public:
         spinBox1->setMaximum(6);
         spinBox1->setValue(6);
         splitter->addWidget(spinBox1);
-        label_6 = new QLabel(splitter);
-        label_6->setObjectName(QStringLiteral("label_6"));
-        splitter->addWidget(label_6);
+        label_rcv1 = new QLabel(splitter);
+        label_rcv1->setObjectName(QStringLiteral("label_rcv1"));
+        splitter->addWidget(label_rcv1);
         lcdNumber_FR1 = new QLCDNumber(splitter);
         lcdNumber_FR1->setObjectName(QStringLiteral("lcdNumber_FR1"));
         lcdNumber_FR1->setProperty("intValue", QVariant(42000));
@@ -150,9 +153,9 @@ public:
         spinBox2->setMaximum(6);
         spinBox2->setValue(6);
         splitter_2->addWidget(spinBox2);
-        label_7 = new QLabel(splitter_2);
-        label_7->setObjectName(QStringLiteral("label_7"));
-        splitter_2->addWidget(label_7);
+        label_rcv2 = new QLabel(splitter_2);
+        label_rcv2->setObjectName(QStringLiteral("label_rcv2"));
+        splitter_2->addWidget(label_rcv2);
         lcdNumber_FR2 = new QLCDNumber(splitter_2);
         lcdNumber_FR2->setObjectName(QStringLiteral("lcdNumber_FR2"));
         splitter_2->addWidget(lcdNumber_FR2);
@@ -175,9 +178,9 @@ public:
         spinBox3->setMaximum(6);
         spinBox3->setValue(0);
         splitter_3->addWidget(spinBox3);
-        label_8 = new QLabel(splitter_3);
-        label_8->setObjectName(QStringLiteral("label_8"));
-        splitter_3->addWidget(label_8);
+        label_rcv3 = new QLabel(splitter_3);
+        label_rcv3->setObjectName(QStringLiteral("label_rcv3"));
+        splitter_3->addWidget(label_rcv3);
         lcdNumber_FR3 = new QLCDNumber(splitter_3);
         lcdNumber_FR3->setObjectName(QStringLiteral("lcdNumber_FR3"));
         splitter_3->addWidget(lcdNumber_FR3);
@@ -199,9 +202,9 @@ public:
         spinBox4->setObjectName(QStringLiteral("spinBox4"));
         spinBox4->setMaximum(6);
         splitter_4->addWidget(spinBox4);
-        label_9 = new QLabel(splitter_4);
-        label_9->setObjectName(QStringLiteral("label_9"));
-        splitter_4->addWidget(label_9);
+        label_rcv4 = new QLabel(splitter_4);
+        label_rcv4->setObjectName(QStringLiteral("label_rcv4"));
+        splitter_4->addWidget(label_rcv4);
         lcdNumber_FR4 = new QLCDNumber(splitter_4);
         lcdNumber_FR4->setObjectName(QStringLiteral("lcdNumber_FR4"));
         splitter_4->addWidget(lcdNumber_FR4);
@@ -215,6 +218,13 @@ public:
         MyMsg = new QLabel(centralWidget);
         MyMsg->setObjectName(QStringLiteral("MyMsg"));
         MyMsg->setGeometry(QRect(160, 240, 231, 20));
+        radioButton_FIFO = new QRadioButton(centralWidget);
+        radioButton_FIFO->setObjectName(QStringLiteral("radioButton_FIFO"));
+        radioButton_FIFO->setGeometry(QRect(300, 230, 100, 23));
+        radioButton_UDP = new QRadioButton(centralWidget);
+        radioButton_UDP->setObjectName(QStringLiteral("radioButton_UDP"));
+        radioButton_UDP->setGeometry(QRect(300, 200, 100, 23));
+        radioButton_UDP->setChecked(true);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -253,18 +263,20 @@ public:
         checkBox_GNU->setText(QApplication::translate("MainWindow", "Start GNU", Q_NULLPTR));
         label_5->setText(QApplication::translate("MainWindow", "Select number of Telive Receivers", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Receiver1", Q_NULLPTR));
-        label_6->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
+        label_rcv1->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
         label_10->setText(QApplication::translate("MainWindow", "  -", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "Receiver2", Q_NULLPTR));
-        label_7->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
+        label_rcv2->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
         label_11->setText(QApplication::translate("MainWindow", "  -", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "Receiver3", Q_NULLPTR));
-        label_8->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
+        label_rcv3->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
         label_12->setText(QApplication::translate("MainWindow", "  -", Q_NULLPTR));
         label_4->setText(QApplication::translate("MainWindow", "Receiver4", Q_NULLPTR));
-        label_9->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
+        label_rcv4->setText(QApplication::translate("MainWindow", "UDP Port", Q_NULLPTR));
         label_13->setText(QApplication::translate("MainWindow", "  -", Q_NULLPTR));
         MyMsg->setText(QString());
+        radioButton_FIFO->setText(QApplication::translate("MainWindow", "Use FIFO File", Q_NULLPTR));
+        radioButton_UDP->setText(QApplication::translate("MainWindow", "Use UDP", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
     } // retranslateUi
