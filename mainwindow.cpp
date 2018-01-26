@@ -11,6 +11,7 @@
 #include <QSettings>
 #include <iostream>
 
+
 #ifndef MYGLOBALS
 #define MYGLOBALS
 
@@ -20,14 +21,18 @@ int i3 = 0;
 int i4 = 0;
 int i5;
 int i6;
+int i7;
 int r1, r2, r3, r4;
 int dft = 1;
-QString mtab, vis1, text;
+QString mtab, vis1, text, fifo;
 char StartGNU;
 char StartTD;
 
 #endif
 
+//**************************************************************************************************
+//* Main Program
+//**************************************************************************************************
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -36,8 +41,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
      ui->setupUi(this);
      LoadSettings();
+     CalcLCD();
 
   }
+
+//**************************************************************************************************
+//* End
+//**************************************************************************************************
 
 MainWindow::~MainWindow()
 {
@@ -45,13 +55,21 @@ MainWindow::~MainWindow()
 
 }
 
+//**************************************************************************************************
+//* Start Bottom Pushed - Start Telive
+//**************************************************************************************************
+
+
 void MainWindow::on_pushButton_clicked()
 {
 
     QProcess cmd;
     QString currPath = QDir::homePath();
     QDir::setCurrent(currPath + "/tetra/telive");
-
+    if (fifo == "Y")
+      {
+         CreateFIFO();
+      }
 
    if (i1 > 0)
     {
@@ -64,12 +82,28 @@ void MainWindow::on_pushButton_clicked()
        {
         QThread::msleep(100);
 
+        // Start UDP on Receiver 1
+        if (fifo == "N")
+        {
         cmd.startDetached("mate-terminal", QStringList() <<
           mtab <<
           "--title" << "Receiver 1:" + QString::number(r1) <<
           "-e" <<
           "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver1udp " +
                           QString::number(r1) + "; done ; exec bash\'");
+        }
+
+        // Start Fifo on Receiver 1
+        if (fifo == "Y")
+        {
+        cmd.startDetached("mate-terminal", QStringList() <<
+          mtab <<
+          "--title" << "Receiver 1:" + QString::number(r1) <<
+          "-e" <<
+          "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver1 " +
+                          QString::number(r1) + "; done ; exec bash\'");
+        }
+
         mtab = "--tab";
         text = "Start Receiver1:" + QString::number(r1);
         qDebug() << text;
@@ -93,12 +127,29 @@ void MainWindow::on_pushButton_clicked()
        for (r2 = 1; r2 <= i2; ++r2)
        {
         QThread::msleep(100);
+
+        // Start UDP on Receiver 2
+        if (fifo == "N")
+        {
         cmd.startDetached("mate-terminal", QStringList() <<
           mtab <<
           "--title" << "Receiver 2:" + QString::number(r2) <<
           "-e" <<
           "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver2udp " +
                           QString::number(r1 + r2) + "; done ; exec bash\'");
+        }
+
+        // Start Fifo on Receiver 2
+        if (fifo == "Y")
+        {
+        cmd.startDetached("mate-terminal", QStringList() <<
+          mtab <<
+          "--title" << "Receiver 2:" + QString::number(r2) <<
+          "-e" <<
+          "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver2 " +
+                          QString::number(r1 + r2) + "; done ; exec bash\'");
+        }
+
         mtab = "--tab";
         text = "Start Receiver2:" + QString::number(r1 + r2);
         qDebug() << text;// Subtract 1
@@ -121,12 +172,29 @@ void MainWindow::on_pushButton_clicked()
        for (r3 = 1; r3 <= i3; ++r3)
        {
         QThread::msleep(100);
+
+        // Start UDP on Receiver 3
+        if (fifo == "N")
+        {
         cmd.startDetached("mate-terminal", QStringList() <<
           mtab <<
           "--title" << "Receiver 3:" + QString::number(r3) <<
           "-e" <<
           "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver3udp " +
                           QString::number(r1 + r2 + r3) + "; done ; exec bash\'");
+        }
+
+        // Start Fifo on Receiver 3
+        if (fifo == "Y")
+        {
+        cmd.startDetached("mate-terminal", QStringList() <<
+          mtab <<
+          "--title" << "Receiver 3:" + QString::number(r3) <<
+          "-e" <<
+          "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver3 " +
+                          QString::number(r1 + r2 + r3) + "; done ; exec bash\'");
+        }
+
           mtab = "--tab";
           text = "Start Receiver3:" + QString::number(r1 + r2 + r3);
           qDebug() << text;
@@ -147,14 +215,31 @@ void MainWindow::on_pushButton_clicked()
        for (r4 = 1; r4 <= i4; ++r4)
        {
         QThread::msleep(100);
+
+        // Start UDP on Receiver 4
+        if (fifo == "N")
+        {
         cmd.startDetached("mate-terminal", QStringList() <<
           mtab <<
           "--title" << "Receiver 4:" + QString::number(r4) <<
           "-e" <<
           "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver4udp " +
                           QString::number(r1 + r2 + r3 + r4) + "; done ; exec bash\'");
-          mtab = "--tab";
 
+        }
+
+        // Start Fifo on Receiver 4
+        if (fifo == "Y")
+        {
+        cmd.startDetached("mate-terminal", QStringList() <<
+          mtab <<
+          "--title" << "Receiver 4:" + QString::number(r4) <<
+          "-e" <<
+          "bash -c \'cd ~/tetra/osmo-tetra-sq5bpf/src; while true; do ./receiver4 " +
+                          QString::number(r1 + r2 + r3 + r4) + "; done ; exec bash\'");
+        }
+
+          mtab = "--tab";
           text = "Start Receiver2:" + QString::number(r1 + r2 + r3 + r4);
           qDebug() << text;
        }
@@ -179,6 +264,9 @@ void MainWindow::on_pushButton_clicked()
 }
 
 
+//**************************************************************************************************
+//* Receiver 1 Changed in GUI.
+//**************************************************************************************************
 
 void MainWindow::on_spinBox1_valueChanged(int arg1)
 {
@@ -186,6 +274,10 @@ void MainWindow::on_spinBox1_valueChanged(int arg1)
     CalcLCD();
 
 }
+
+//**************************************************************************************************
+//* Receiver 2 Changed in GUI.
+//**************************************************************************************************
 
 void MainWindow::on_spinBox2_valueChanged(int arg1)
 {
@@ -202,8 +294,11 @@ void MainWindow::on_spinBox2_valueChanged(int arg1)
 
     }
 
-
 }
+
+//**************************************************************************************************
+//* Receiver 3 Changed in GUI.
+//**************************************************************************************************
 
 void MainWindow::on_spinBox3_valueChanged(int arg1)
 {
@@ -221,6 +316,9 @@ void MainWindow::on_spinBox3_valueChanged(int arg1)
     }
 }
 
+//**************************************************************************************************
+//* Receiver 4 Changed in GUI.
+//**************************************************************************************************
 
 void MainWindow::on_spinBox4_valueChanged(int arg1)
 {
@@ -236,9 +334,12 @@ void MainWindow::on_spinBox4_valueChanged(int arg1)
         msgBox.exec();
 
     }
-    //qDebug("her");
+
 }
 
+//**************************************************************************************************
+//* Save Settings
+//**************************************************************************************************
 
 void MainWindow::on_actionSave_Settings_triggered()
 {
@@ -267,11 +368,21 @@ void MainWindow::on_actionSave_Settings_triggered()
        settings.setValue("TD", 0);
     }
 
+   // Save Settings for FIFO
+   if (ui->radioButton_FIFO->isChecked()) {
+       settings.setValue("FIFO", 1);
+    }
+    else {
+       settings.setValue("FIFO", 0);
+    }
 
 
 
 }
 
+//**************************************************************************************************
+//* Load Settings
+//**************************************************************************************************
 
 void MainWindow::LoadSettings()
 {
@@ -285,6 +396,7 @@ void MainWindow::LoadSettings()
     i4 = settings.value("RCV4",dft).toInt();
     i5 = settings.value("GNU",dft).toInt();
     i6 = settings.value("TD",dft).toInt();
+    i7 = settings.value("FIFO",dft).toInt();
 
     // set settings to GUI.
     ui->spinBox1->setValue(i1);
@@ -304,28 +416,66 @@ void MainWindow::LoadSettings()
          ui->checkBox_TD->setChecked(false);
     }
 
+    // Set FIFO
+    if (i7 == 0){
+        fifo = "N";
+        ui->radioButton_FIFO->setChecked(false);
+        ui->radioButton_UDP->setChecked(true);
+      }
+    else {
+        ui->radioButton_FIFO->setChecked(true);
+        ui->radioButton_UDP->setChecked(false);
+        fifo = "Y";
+     }
+
 
 
 }
 
+//**************************************************************************************************
+//* Calculate Numbers in Telive Receivers UDP or FIFO
+//**************************************************************************************************
 
 void MainWindow::CalcLCD()
 {
-    // set UDP Port for Receiver 1
-    ui->lcdNumber_FR1->display(42001);
-    ui->lcdNumber_TO1->display(42000 + i1);
 
-    // set UDP Port for Receiver 2
-    ui->lcdNumber_FR2->display(42000 + i1 + 1);
-    ui->lcdNumber_TO2->display(42000 + i1 + i2);
+    if (fifo == "N")
+      {
+      // set UDP Port for Receiver 1
+      ui->lcdNumber_FR1->display(42001);
+      ui->lcdNumber_TO1->display(42000 + i1);
 
-    // set UDP Port for Receiver 3
-    ui->lcdNumber_FR3->display(42000 + i1 + i2 + 1);
-    ui->lcdNumber_TO3->display(42000 + i1 + i2 + i3);
+      // set UDP Port for Receiver 2
+      ui->lcdNumber_FR2->display(42000 + i1 + 1);
+      ui->lcdNumber_TO2->display(42000 + i1 + i2);
 
-    // set UDP Port for Receiver 4
-    ui->lcdNumber_FR4->display(42000 + i1 + i2 + i3 + 1);
-    ui->lcdNumber_TO4->display(42000 + i1 + i2 + i3 + i4);
+      // set UDP Port for Receiver 3
+      ui->lcdNumber_FR3->display(42000 + i1 + i2 + 1);
+      ui->lcdNumber_TO3->display(42000 + i1 + i2 + i3);
+
+      // set UDP Port for Receiver 4
+      ui->lcdNumber_FR4->display(42000 + i1 + i2 + i3 + 1);
+      ui->lcdNumber_TO4->display(42000 + i1 + i2 + i3 + i4);
+      }
+
+    if (fifo == "Y")
+      {
+        // set UDP Port for Receiver 1
+        ui->lcdNumber_FR1->display(1);
+        ui->lcdNumber_TO1->display(0 + i1);
+
+        // set UDP Port for Receiver 2
+        ui->lcdNumber_FR2->display(0 + i1 + 1);
+        ui->lcdNumber_TO2->display(0 + i1 + i2);
+
+        // set UDP Port for Receiver 3
+        ui->lcdNumber_FR3->display(0 + i1 + i2 + 1);
+        ui->lcdNumber_TO3->display(0 + i1 + i2 + i3);
+
+        // set UDP Port for Receiver 4
+        ui->lcdNumber_FR4->display(0 + i1 + i2 + i3 + 1);
+        ui->lcdNumber_TO4->display(0 + i1 + i2 + i3 + i4);
+      }
 
 
     // Set alwais UDP to 0 if Receiver 2 not selected
@@ -356,11 +506,57 @@ void MainWindow::CalcLCD()
 
 }
 
+//**************************************************************************************************
+//* Create FIFO Files if FIFO Selected
+//**************************************************************************************************
+
+void MainWindow::CreateFIFO()
+{
+    QProcess cmd;
+    if (i1 > 0)
+      {
+        cmd.start("mkfifo /tmp/fifo1");
+        cmd.write("mkfifo /tmp/fifo2");
+        cmd.write("mkfifo /tmp/fifo3");
+        cmd.write("mkfifo /tmp/fifo4");
+      }
+    if (i2 > 0)
+      {
+        cmd.write("mkfifo /tmp/fifo5");
+        cmd.write("mkfifo /tmp/fifo6");
+        cmd.write("mkfifo /tmp/fifo7");
+        cmd.write("mkfifo /tmp/fifo8");
+      }
+    if (i3 > 0)
+      {
+        cmd.write("mkfifo /tmp/fifo9");
+        cmd.write("mkfifo /tmp/fifo10");
+        cmd.write("mkfifo /tmp/fifo11");
+        cmd.write("mkfifo /tmp/fifo12");
+      }
+    if (i4 > 0)
+      {
+        cmd.write("mkfifo /tmp/fifo13");
+        cmd.write("mkfifo /tmp/fifo14");
+        cmd.write("mkfifo /tmp/fifo15");
+        cmd.write("mkfifo /tmp/fifo16");
+      }
+        cmd.close();
+
+}
+
+//**************************************************************************************************
+//* Exit Applaication Selected in Menu
+//**************************************************************************************************
 
 void MainWindow::on_actionExit_triggered()
 {
      QApplication::quit();
 }
+
+//**************************************************************************************************
+//* About Panel Selected
+//**************************************************************************************************
 
 void MainWindow::on_actionAbout_triggered()
 {
@@ -368,4 +564,32 @@ void MainWindow::on_actionAbout_triggered()
     dialog.setModal(true);
     dialog.exec();
 
+}
+
+//**************************************************************************************************
+//* FIFO Selected
+//**************************************************************************************************
+
+void MainWindow::on_radioButton_FIFO_toggled(bool checked)
+{
+    ui->label_rcv1->setText("/tmp/fifo");
+    ui->label_rcv2->setText("/tmp/fifo");
+    ui->label_rcv3->setText("/tmp/fifo");
+    ui->label_rcv4->setText("/tmp/fifo");
+    fifo = "Y";
+    CalcLCD();
+}
+
+//**************************************************************************************************
+//* UDP Selected
+//**************************************************************************************************
+
+void MainWindow::on_radioButton_UDP_toggled(bool checked)
+{
+    ui->label_rcv1->setText("UDP Port");
+    ui->label_rcv2->setText("UDP Port");
+    ui->label_rcv3->setText("UDP Port");
+    ui->label_rcv4->setText("UDP Port");
+    fifo = "N";
+    CalcLCD();
 }

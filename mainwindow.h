@@ -36,9 +36,15 @@ private slots:
 
     void CalcLCD();
 
+    void CreateFIFO();
+
     void on_actionExit_triggered();
 
     void on_actionAbout_triggered();
+
+    void on_radioButton_FIFO_toggled(bool checked);
+
+    void on_radioButton_UDP_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;

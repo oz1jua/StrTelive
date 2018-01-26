@@ -117,7 +117,7 @@
       <number>6</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="label_rcv1">
      <property name="text">
       <string>UDP Port</string>
      </property>
@@ -164,7 +164,7 @@
       <number>6</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="label_rcv2">
      <property name="text">
       <string>UDP Port</string>
      </property>
@@ -207,7 +207,7 @@
       <number>0</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="label_rcv3">
      <property name="text">
       <string>UDP Port</string>
      </property>
@@ -247,7 +247,7 @@
       <number>6</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_9">
+    <widget class="QLabel" name="label_rcv4">
      <property name="text">
       <string>UDP Port</string>
      </property>
@@ -276,6 +276,35 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_FIFO">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>230</y>
+      <width>100</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Use FIFO File</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_UDP">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>200</y>
+      <width>100</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Use UDP</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

@@ -90,7 +90,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Start Telive Beta Version 0.10</string>
+    <string>Start Telive Beta Version 0.20</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_9">
