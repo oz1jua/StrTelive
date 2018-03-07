@@ -1,9 +1,20 @@
-StrTelive Version 0.20 Beta. 
+
+
+#### StrTelive Version 0.20 Beta. 
 
 StrTelive - Program use for starting Telive.
 Telive was created by Jacek Lipkowski sq5bpf@lipkowski.org. 
 
-Start Telive GUI Program
+Some screenshots:
+
+![Full](./Screenshot%20at%202018-01-26%2002:22:55.png)
+
+The settings: 
+
+![Full](./Screenshot%20at%202018-01-26%2002:22:38.png)
+
+
+#### Start Telive GUI Program
 
 This program is written for starting Telive. For now it only start Telive for used with UDP. 
 This is my first program written in QT. 
