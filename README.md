@@ -19,6 +19,8 @@ I still have no idea haw to deploy runnning version. Still have to lean a lot...
 
 Added function for switch between FIFO and UDP.
 
+![Preview](https://github.com/oz1jua/StrTelive/blob/master/Screenshot%20at%202018-01-26%2002:22:55.png)
+
 ---------- Disclaimer ----------
 
 The program is licenced under GPL v3 (license text is also included in the file LICENSE). 
